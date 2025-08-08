@@ -19,6 +19,8 @@ const Contact = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
   const holdTimer = useRef(null);
   const progressTimer = useRef(null);
 
@@ -227,7 +229,7 @@ const Contact = () => {
       .then(
         () => {
           console.log('SUCCESS!');
-          document.getElementById("alertSuccess").classList.remove("hidden");
+          setShowSuccessToast(true);
           // Réinitialiser le formulaire
           setFormData({
             user_name: '',
@@ -239,7 +241,7 @@ const Contact = () => {
         },
         (error) => {
           console.log('FAILED...', error.text);
-          document.getElementById("alertError").classList.remove("hidden");
+          setShowErrorToast(true);
           setFormErrors({ submit: 'Erreur lors de l\'envoi. Veuillez réessayer.' });
         },
       )
@@ -248,15 +250,23 @@ const Contact = () => {
       });
   };
 
-  return (
+    return (
     <div className="min-h-screen py-16 px-4 sm:py-20 lg:py-24" id='contact'>
         <div className="max-w-6xl mx-auto space-y-8 sm:space-y-12 lg:space-y-16">
-          <div id="alertSuccess" className="hidden">
-            <Toast message="MESSAGE SENT SUCCESSFULLY !" duration={3000} />
-          </div>
-          <div id="alertError" className="hidden" duration={5000}>
-            <ErrorToast message="TRANSMISSION ERROR - PLEASE RETRY" />
-          </div>
+          {showSuccessToast && (
+            <Toast 
+              message="MESSAGE SENT SUCCESSFULLY !" 
+              typeAlert="success" 
+              onClose={() => setShowSuccessToast(false)} 
+            />
+          )}
+          {showErrorToast && (
+            <Toast 
+              message="TRANSMISSION ERROR - PLEASE RETRY" 
+              typeAlert="error" 
+              onClose={() => setShowErrorToast(false)} 
+            />
+          )}
 
           {/* DJ Console Header */}
           <div>

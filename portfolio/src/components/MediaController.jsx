@@ -44,7 +44,7 @@ const MediaController = ({ onAudioRef, onPlayingChange }) => {
       name: "Demo Popeye",
       videoUrl: "/videos/DemoPopeye.mp4",
       duration: "2:15",
-      type: "Game Demo"
+      type: "Docker Demo"
     },
     {
       name: "RPG Empire Demo",
