@@ -290,7 +290,7 @@ const TechStack = () => {
         transition={{ delay: 1 }}
         className="mt-12 text-center"
       >
-        <div className="flex justify-center items-center space-x-6 text-sm text-text-light/60 dark:text-white relative z-50">
+        <div className="flex justify-center items-center space-x-6 text-sm text-white relative z-50">
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 rounded-full bg-gradient-to-r from-neon-magenta to-bass-purple animate-pulse" />
             <span>Récemment appris</span>

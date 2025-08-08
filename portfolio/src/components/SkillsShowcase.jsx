@@ -233,10 +233,10 @@ const SkillsShowcase = () => {
               <div className="flex items-start space-x-4 mb-4">
                 <div className="text-3xl flex-shrink-0">{skill.icon}</div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-text-light dark:text-text-dark mb-2">
+                  <h3 className="text-xl font-bold text-white mb-2">
                     {skill.name}
                   </h3>
-                  <p className="text-sm text-text-light/70 dark:text-text-dark/70 mb-3">
+                  <p className="text-sm text-white mb-3">
                     {skill.description}
                   </p>
                 </div>
@@ -244,7 +244,7 @@ const SkillsShowcase = () => {
 
               {/* Contexts */}
               <div>
-                <p className="text-sm font-semibold text-text-light/80 dark:text-text-dark/80 mb-2">
+                <p className="text-sm font-semibold text-white mb-2">
                   Contextes d'application :
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -273,7 +273,7 @@ const SkillsShowcase = () => {
         transition={{ delay: 1 }}
         className="mt-12 text-center"
       >
-        <div className="flex justify-center items-center space-x-6 text-sm text-text-light/60 dark:text-white relative z-50">
+        <div className="flex justify-center items-center space-x-6 text-sm text-white relative z-50">
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 rounded-full bg-gradient-to-r from-neon-magenta to-bass-purple animate-pulse" />
             <span>Récemment développé</span>
