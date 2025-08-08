@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4b2396ab-9044-47dc-a3d4-76a29e7df2cf/deploy-status)](https://app.netlify.com/projects/pf-michelbkt/deploys)
+
 # Portfolio Personnel - Thème  🎵
 
 Un portfolio moderne et interactif construit avec React et Vite, mettant en avant mes projets à travers une expérience visuelle et sonore inspirée de la culture électronique et .
