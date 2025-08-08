@@ -13,20 +13,32 @@ const MediaController = ({ onAudioRef, onPlayingChange }) => {
   const videoRef = useRef(null);
   const animationRef = useRef(null);
 
-  // Audio track unique - toujours "Nicolas Binder - Moment"
-  const audioTrack = useMemo(() => ({
-    name: "Nicolas Binder - Moment",
-    url: "/audio/Nicolas Binder.mp3",
-    cover: "/images/vinyl.png",
-    duration: "3:24"
-  }), []);
+  // Audio tracks
+  const audioTracks = useMemo(() => [{
+      name: "Nicolas Binder - Moment",
+      url: "/audio/Nicolas Binder.mp3",
+      cover: "/images/vinyl.png",
+      duration: "3:24",
+  },
+      {name: "Aurora Night - Memories",
+        url: "/audio/Aurora Night - Memories Beautiful Chillstep.mp3",
+        cover: "/images/AuroraNight-Memories-Cover.png",
+        duration: "3:04"
+      }
+      ], []);
 
   const videoItems = useMemo(() => [
     {
-      name: "Nicolas Binder - Moment",
+      name: "Nicolas Binder - Moment - Clip & Lyrics",
       videoUrl: "/videos/Nicolas Binder-Moment_Clip.mp4",
       duration: "3:24",
       type: "Music Video"
+    },
+    {
+        name: "Aurora Night - Memories - Clip",
+        videoUrl: "/videos/Aurora Night - Memories  Beautiful Chillstep.mp4",
+        duration: "3:04",
+        type: "Music Video"
     },
     {
       name: "Demo Popeye",
@@ -158,9 +170,14 @@ const MediaController = ({ onAudioRef, onPlayingChange }) => {
         videoRef.current.load();
         videoRef.current.play().catch(e => console.log('Media play failed:', e));
       }
+    } else if (mediaType === 'audio') {
+      setCurrentMedia((prev) => (prev + 1) % audioTracks.length);
+      if (isPlaying && audioRef.current) {
+        audioRef.current.load();
+        audioRef.current.play().catch(e => console.log('Media play failed:', e));
+      }
     }
-    // En mode audio, pas de changement car il n'y a qu'une piste
-  }, [isPlaying, mediaType, videoItems.length]);
+  }, [isPlaying, mediaType, videoItems.length, audioTracks.length]);
 
   const prevMedia = useCallback(() => {
     if (mediaType === 'video') {
@@ -169,9 +186,14 @@ const MediaController = ({ onAudioRef, onPlayingChange }) => {
         videoRef.current.load();
         videoRef.current.play().catch(e => console.log('Media play failed:', e));
       }
+    } else if (mediaType === 'audio') {
+      setCurrentMedia((prev) => (prev - 1 + audioTracks.length) % audioTracks.length);
+      if (isPlaying && audioRef.current) {
+        audioRef.current.load();
+        audioRef.current.play().catch(e => console.log('Media play failed:', e));
+      }
     }
-    // En mode audio, pas de changement car il n'y a qu'une piste
-  }, [isPlaying, mediaType, videoItems.length]);
+  }, [isPlaying, mediaType, videoItems.length, audioTracks.length]);
 
   const selectMedia = useCallback((index) => {
     if (mediaType === 'video') {
@@ -180,8 +202,13 @@ const MediaController = ({ onAudioRef, onPlayingChange }) => {
         videoRef.current.load();
         videoRef.current.play().catch(e => console.log('Media play failed:', e));
       }
+    } else if (mediaType === 'audio') {
+      setCurrentMedia(index);
+      if (isPlaying && audioRef.current) {
+        audioRef.current.load();
+        audioRef.current.play().catch(e => console.log('Media play failed:', e));
+      }
     }
-    // En mode audio, pas de sélection car il n'y a qu'une piste
   }, [isPlaying, mediaType]);
 
   const switchMediaType = useCallback(() => {
@@ -226,8 +253,9 @@ const MediaController = ({ onAudioRef, onPlayingChange }) => {
   }, [isFullscreen, mediaType]);
 
   const currentVideoItem = videoItems[currentMedia];
+  const currentAudioTrack = audioTracks[currentMedia];
   const hasVideo = currentVideoItem?.videoUrl;
-  const hasAudio = audioTrack.url;
+  const hasAudio = currentAudioTrack?.url;
 
   return (
     <>
@@ -239,7 +267,7 @@ const MediaController = ({ onAudioRef, onPlayingChange }) => {
         onPause={() => setIsPlaying(false)}
         onEnded={() => setIsPlaying(false)}
       >
-        <source src={audioTrack.url} type="audio/mp3" />
+        <source src={audioTracks[currentMedia]?.url} type="audio/mp3" />
       </audio>
 
       {/* Vidéo d'arrière-plan ou Vinyle */}
@@ -266,8 +294,8 @@ const MediaController = ({ onAudioRef, onPlayingChange }) => {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative">
               <img
-                src={audioTrack.cover}
-                alt={audioTrack.name}
+                src={audioTracks[currentMedia]?.cover}
+                alt={audioTracks[currentMedia]?.name}
                 className="w-96 h-96 rounded-full object-cover transition-transform duration-100 ease-linear shadow-2xl"
                 style={{ transform: `rotate(${rotation}deg)` }}
               />
@@ -602,28 +630,42 @@ const MediaController = ({ onAudioRef, onPlayingChange }) => {
             {/* Enhanced Playlist */}
             <div className="space-y-2">
               <div className="flex items-center justify-between mb-3">
-                <div className="text-neon-violet text-xs font-rajdhani font-bold tracking-wider">{mediaType === 'audio' ? 'AUDIO TRACK' : 'VIDEO LIBRARY'}</div>
-                <div className="text-neon-cyan text-xs font-rajdhani">{mediaType === 'audio' ? '1/1' : `${currentMedia + 1}/${videoItems.length}`}</div>
+                <div className="text-neon-violet text-xs font-rajdhani font-bold tracking-wider">{mediaType === 'audio' ? 'AUDIO LIBRARY' : 'VIDEO LIBRARY'}</div>
+                <div className="text-neon-cyan text-xs font-rajdhani">{mediaType === 'audio' ? `${currentMedia + 1}/${audioTracks.length}` : `${currentMedia + 1}/${videoItems.length}`}</div>
               </div>
               
               <div className="max-h-28 overflow-y-auto space-y-1.5 scrollbar-thin scrollbar-thumb-neon-violet/30 scrollbar-track-synth-darker">
                 {mediaType === 'audio' ? (
-                  // Mode audio - afficher uniquement la piste audio
-                  <div className="bg-neon-magenta/30 text-white border border-neon-magenta/60 shadow-lg shadow-neon-magenta/20 w-full text-left p-2 rounded text-xs">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-neon-magenta animate-pulse shadow-lg shadow-neon-magenta/50"></div>
-                        <div>
-                          <div className="font-rajdhani font-bold">{audioTrack.name}</div>
-                          <div className="flex gap-2 text-xs opacity-70 mt-1">
-                            <span>Music</span>
-                            <span className="text-neon-magenta">♪</span>
+                  // Mode audio - afficher toutes les pistes audio
+                  audioTracks.map((track, index) => (
+                    <button
+                      key={index}
+                      onClick={() => selectMedia(index)}
+                      className={`w-full text-left p-2 rounded text-xs transition-all duration-300 group ${
+                        currentMedia === index 
+                          ? 'bg-neon-magenta/30 text-white border border-neon-magenta/60 shadow-lg shadow-neon-magenta/20' 
+                          : 'text-neon-magenta/70 hover:bg-neon-magenta/10 hover:text-neon-magenta border border-transparent hover:border-neon-magenta/30'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            currentMedia === index 
+                              ? 'bg-neon-magenta animate-pulse shadow-lg shadow-neon-magenta/50' 
+                              : 'bg-neon-magenta/40 group-hover:bg-neon-magenta/70'
+                          }`}></div>
+                          <div>
+                            <div className="font-rajdhani font-bold">{track.name}</div>
+                            <div className="flex gap-2 text-xs opacity-70 mt-1">
+                              <span>Music</span>
+                              <span className="text-neon-magenta">♪</span>
+                            </div>
                           </div>
                         </div>
+                        <div className="text-neon-cyan text-xs font-mono">{track.duration}</div>
                       </div>
-                      <div className="text-neon-cyan text-xs font-mono">{audioTrack.duration}</div>
-                    </div>
-                  </div>
+                    </button>
+                  ))
                 ) : (
                   // Mode vidéo - afficher les vidéos disponibles
                   videoItems.map((item, index) => (

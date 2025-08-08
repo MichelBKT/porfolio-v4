@@ -13,7 +13,11 @@ const AudioPlayer = ({ onAudioRef, onPlayingChange }) => {
     {
       name: "Moment - Nicolas Binder",
       url: "/audio/Nicolas Binder.mp3"
-    }
+    },
+    {
+        name: "Memories - Aurora Night",
+        url: "/audio/Aurora Night - Memories Beautiful Chillstep.mp3"
+    },
   ];
 
   useEffect(() => {
