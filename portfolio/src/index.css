@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme CSS variables */
+    --color-bg: 248 250 252; /* bg-slate-50 */
+    --color-card: 255 255 255; /* white */
+    --color-text: 30 41 59; /* slate-800 */
+    --color-text-secondary: 100 116 139; /* slate-500 */
+    --color-accent: 59 130 246; /* blue-500 */
+    --color-border: 226 232 240; /* slate-200 */
+    --color-shadow: 0 0 0; /* transparent for light mode */
+    
+    /* Theme transition duration */
+    --theme-transition: 300ms;
+  }
+  
+  .dark {
+    /* Dark theme CSS variables */
+    --color-bg: 10 10 10; /* #0a0a0a */
+    --color-card: 26 26 26; /* #1a1a1a */
+    --color-text: 255 255 255; /* white */
+    --color-text-secondary: 156 163 175; /* gray-400 */
+    --color-accent: 0 255 255; /* neon-cyan */
+    --color-border: 55 65 81; /* gray-700 */
+    --color-shadow: 0 255 255; /* neon-cyan for glow effects */
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+  
+  .dark html {
+    color-scheme: dark;
+  }
+  
+  body {
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-text));
+    transition: background-color var(--theme-transition) ease,
+                color var(--theme-transition) ease;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-md transition-colors;
+  }
+  
+  .btn-primary {
+    @apply bg-galaxy-light text-white hover:bg-galaxy-light/80;
+  }
+}
+
+@layer utilities {
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+* {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              fill 0.3s ease;
+}
+
+/* Custom selection styles for better visibility */
+::selection {
+  background-color: #00ffff66 !important; /* neon-cyan with 40% opacity */
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+::-moz-selection {
+  background-color: #00ffff66 !important; /* neon-cyan with 40% opacity */
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* Enhanced selection for better contrast */
+h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::selection {
+  background-color: #8a2be266 !important; /* neon-magenta with 40% opacity */
+  color: #ffffff !important;
+}
+
+/* Input field selection */
+input::selection,
+textarea::selection {
+  background-color: #00ffff99 !important; /* neon-cyan with 60% opacity */
+  color: #ffffff !important;
+}
+
+/* Button and interactive element selection */
+button::selection,
+a::selection {
+  background-color: #8a2be266 !important; /* neon-violet with 40% opacity */
+  color: #ffffff !important;
+}
+
+/* Typography component selection */
+.font-orbitron::selection {
+  background-color: #8a2be266 !important; /* neon-magenta */
+  color: #ffffff !important;
+}
+
+.font-rajdhani::selection {
+  background-color: #00ffff44 !important; /* neon-cyan lighter */
+  color: #ffffff !important;
+}
+
+/* Additional theme-aware utilities */
+.theme-transition {
+  transition: background-color var(--theme-transition) ease,
+              color var(--theme-transition) ease,
+              border-color var(--theme-transition) ease,
+              box-shadow var(--theme-transition) ease,
+              fill var(--theme-transition) ease,
+              opacity var(--theme-transition) ease;
+}
+
+button, svg {
+  @apply theme-transition;
+}
+
+@keyframes spin-scale {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(1440deg);
+    opacity: 0;
+  }
+}
+
+.animate-spin-scale {
+  animation: spin-scale 2s cubic-bezier(0.87,0,.68,1) forwards;
+  border-radius: 9999px !important; /* pour former un point à la fin */
+}
+
+@keyframes slideInRightToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRightToLeft 0.6s ease-out forwards;
+}

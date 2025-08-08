@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Block access to build artifacts and config files
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /*.config.js
+Disallow: /*.config.ts
+Disallow: /package*.json
+
+# Allow important assets
+Allow: /images/
+Allow: /icons/
+Allow: /videos/
+Allow: /audio/
+Allow: /CV_Michel_BANCKAERT_v15.pdf
+
+# Sitemap location
+Sitemap: https://portfolio-michelbkt.fr/sitemap.xml
+
+# Crawl delay (optional - prevents overloading)
+Crawl-delay: 1 
