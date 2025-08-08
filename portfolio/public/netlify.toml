@@ -2,7 +2,6 @@
 command = "npm run build"
 publish = "dist"
 
-[build.environment]
 # Désactiver le scan des secrets pour les clés EmailJS (publiques par design)
 SECRETS_SCAN_OMIT_KEYS = "VITE_EMAILJS_PUBLIC_KEY,VITE_EMAILJS_SERVICE_ID,VITE_EMAILJS_TEMPLATE_ID"
 # Exclure le dossier dist du scan (optionnel)
