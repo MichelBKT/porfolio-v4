@@ -4,7 +4,7 @@ import CardDetails from './CardDetails';
 import TrackCard from './TrackCard';
 import ProjectFilter from './ProjectFilter';
 import { projects } from '../data/projects';
-import Typography from './core/Typography';
+import Typography from './Typography';
 import AudioVisualizer from './AudioVisualizer';
 
 const Projects = () => {

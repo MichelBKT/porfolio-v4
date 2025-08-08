@@ -7,7 +7,6 @@ const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import TurntablePlayer from './components/TurntablePlayer';
 import EqualizerBackground from './components/EqualizerBackground';
 import LazyAnimatedBackground from './components/LazyAnimatedBackground';
 import { BrowserRouter } from 'react-router-dom';

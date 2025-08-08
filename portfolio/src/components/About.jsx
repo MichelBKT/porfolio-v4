@@ -1,8 +1,10 @@
 import React from 'react';
 import TypewriterTwoLines from './TypewriterTwoLines';
-import Typography from './core/Typography';
+import Typography from './Typography';
 import WaveformTimeline from './WaveformTimeline';
 import FlipFlopAnimation from "./FlipFlopAnimation.jsx";
+import TechStack from './TechStack';
+import SkillsShowcase from './SkillsShowcase';
 
 const About = () => {
   const timelineEvents = [
@@ -54,15 +56,22 @@ const About = () => {
             <Typography className="text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 font-rajdhani">
               Depuis toujours, l'informatique est bien plus qu'un simple outil pour moi : c'est une véritable
               passion ! Fasciné par les possibilités infinies du numérique, j'ai d'abord pris un chemin
-              différent en me lançant dans la comptabilité, avec une spécialisation en gestion des paies.
+                différent en me lançant dans la comptabilité, avec une spécialisation en <strong>gestion des paies.</strong>
             </Typography>
             <Typography className="text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 font-rajdhani">
               Mais l'envie de coder, de créer et de donner vie à mes idées ne m'a jamais quitté.
             </Typography>
             <Typography className="text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 font-rajdhani">
-              En 2024, j'ai donc sauté le pas et obtenu mon titre de Développeur Web et Web Mobile.
+                En 2024, j'ai donc sauté le pas et obtenu mon titre de <strong>Développeur Web et Web Mobile.</strong>
               Aujourd'hui, je poursuis mon aventure à Epitech, déterminé à repousser mes limites et à
-              explorer toujours plus loin le monde du développement web.
+               explorer toujours plus loin le monde du développement web.<br/>
+               <br/>
+                Ces différentes expériences m'ont permis de comprendre les <strong>enjeux business réels</strong>, que la rigueur et la
+                méthodologie sont essentielles pour réussir dans ce domaine. J'ai aussi une capacité à traduire des
+                <strong> exigences métier en solutions techniques efficaces</strong>.<br/>
+                <br/>
+                C'est pourquoi, je suis convaincu qu'Epitech est l'école idéale pour moi. Je vais pouvoir me <strong>spécialiser </strong>
+                dans les technologies qui me passionnent, tout en continuant à développer mes compétences en informatique.
             </Typography>
           </div>
         </div>
@@ -100,17 +109,11 @@ const About = () => {
         </div>
 
         <div>
-          <Typography variant='h2' className="lg:text-4xl text-2xl font-orbitron text-neon-violet my-24 text-center animate-pulse">
-            &gt;&gt; TECH_STACK.SYS
-          </Typography>
-          <img 
-            src="/images/stackTeck.png" 
-            alt="Stack technique de Michel Banckaert - Compétences en React, Node.js, Symfony, PHP et technologies web modernes" 
-            className="lg:max-w-3xl w-auto mx-auto max-md:pl-4 rounded-lg shadow-xl mb-4 relative z-10 "
-          />
-          <Typography className="text-gray-300  text-lg text-center mt-24 z-20 relative font-rajdhani">
-            &gt;&gt; LOADING_MORE_SKILLS_SOON...
-          </Typography>
+          <TechStack />
+        </div>
+
+        <div>
+          <SkillsShowcase />
         </div>
     </div>
   );

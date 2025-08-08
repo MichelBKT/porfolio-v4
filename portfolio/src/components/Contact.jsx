@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import Toast from './Toast';
 import ErrorToast from './ErrorToast';
 import AudioVisualizer from './AudioVisualizer';
-import Typography from './core/Typography';
+import Typography from './Typography';
 
 const Contact = () => {
   const form = useRef();

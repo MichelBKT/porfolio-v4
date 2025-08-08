@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
-import Typography from './core/Typography';
+import Typography from './Typography';
 
 const Timeline = () => {
   const [visibleItems, setVisibleItems] = useState(new Set());

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Typography from "./core/Typography.jsx";
+import Typography from "./Typography.jsx";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

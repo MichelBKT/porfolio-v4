@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Typography from '../components/core/Typography'; // adapte le chemin si besoin
 
 const SystemMessage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps

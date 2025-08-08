@@ -1,5 +1,5 @@
 import React from 'react';
-import Typography from './core/Typography';
+import Typography from './Typography';
 
 const ProjectFilter = ({ categories, selectedCategory, onCategoryChange }) => {
   return (

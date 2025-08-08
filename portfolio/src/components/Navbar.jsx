@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Typography from '../components/core/Typography';
+import Typography from '../components/Typography';
 import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {

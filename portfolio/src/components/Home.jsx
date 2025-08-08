@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import TypewriterTwoLines from './TypewriterTwoLines';
-import Typography from '../components/core/Typography';
+import Typography from '../components/Typography';
 import AudioVisualizer from './AudioVisualizer';
 import FloatingMemoji from "./FloatingMemoji.jsx";
 import SystemMessage from "./SystemMessage.jsx";
