@@ -40,7 +40,7 @@ const About = () => {
         <div className="max-w-6xl mx-auto space-y-8 sm:space-y-12 lg:space-y-16">
           <header>
             <Typography variant='h1' className="text-2xl sm:text-4xl lg:text-5xl font-orbitron font-bold text-transparent bg-neon-gradient bg-clip-text text-center mb-6 sm:mb-8 lg:mb-12 animate-pulse-neon">
-              <TypewriterTwoLines fullText="PROFILE.SYS" />
+              <TypewriterTwoLines fullText="ABOUT_ME.SYS" />
             </Typography>
           </header>
           

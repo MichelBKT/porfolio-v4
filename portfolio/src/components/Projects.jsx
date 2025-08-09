@@ -60,7 +60,7 @@ const Projects = () => {
                   <TypewriterTwoLines fullText="MY PLAYLIST" />
                 </Typography>
                 <Typography className="text-sm sm:text-base lg:text-lg font-rajdhani text-neon-cyan">
-                  AUDIO_PROJECTS.EXE
+                  PROJECTS.EXE
                 </Typography>
               </div>
               
