@@ -107,71 +107,27 @@ export const blogPosts = [
         `,
   },
   {
-    id: 'synthwave-production-tips',
-    title: 'Tips pour produire de la synthwave authentique',
-    date: '2025-01-08',
+    id: '2',
+    title: 'NC',
+    date: 'NC',
     author: 'Michel',
-    category: 'tutorial',
-    tags: ['synthwave', 'production', 'synth', 'retro'],
-    excerpt: 'Les techniques essentielles pour capturer l\'essence de la synthwave des années 80.',
+    category: 'NC',
+    tags: ['NC'],
+    excerpt: 'NC.',
     image: '#',
-    readTime: '8 min',
-    content: `# Tips pour produire de la synthwave authentique
-
-## Les bases harmoniques
-
-La synthwave repose sur des progressions d'accords nostalgiques :
-- Utiliser des accords mineurs avec des 7èmes ajoutées
-- Explorer les modes dorien et aeolien
-- Ne pas oublier les power chords des années 80
-
-## Les sons signature
-
-### Les synthés
-- **Bass** : Moog Sub 37 ou émulation
-- **Lead** : Jupiter-8, Juno-106
-- **Pads** : DX7 avec beaucoup de reverb
-
-### Les effets
-- Reverb à gogo (Hall, Plate)
-- Chorus vintage
-- Delay avec feedback
-- Compression parallèle sur la batterie`
+    readTime: 'NC',
+    content: `Bientôt disponible !`,
   },
   {
-    id: 'learning-javascript-music',
-    title: 'Apprendre le JavaScript via la musique',
-    date: '2025-01-02',
+    id: '3',
+    title: 'NC',
+    date: 'NC',
     author: 'Michel',
-    category: 'dev',
-    tags: ['javascript', 'web-audio', 'coding', 'music'],
-    excerpt: 'Comment j\'ai utilisé ma passion pour la musique pour maîtriser la programmation JavaScript.',
+    category: 'NC',
+    tags: ['NC'],
+    excerpt: 'NC.',
     image: '#',
-    readTime: '6 min',
-    content: `# Apprendre le JavaScript via la musique
-
-## L'eurêka moment
-
-Quand j'ai découvert la Web Audio API, tout a changé. Pouvoir créer des visualisations audio, des synthétiseurs virtuels et des effets directement dans le navigateur m'a motivé à approfondir JavaScript.
-
-## Projets pratiques
-
-### Visualiseur audio
-\`\`\`javascript
-const audioContext = new AudioContext();
-const analyser = audioContext.createAnalyser();
-const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-function draw() {
-  analyser.getByteFrequencyData(dataArray);
-  // Dessiner les barres de fréquence
-  requestAnimationFrame(draw);
-}
-\`\`\`
-
-### Séquenceur simple
-Un projet parfait pour apprendre les concepts de timing, d'événements et d'état en JavaScript.
-
-La musique rend l'apprentissage du code plus concret et motivant !`
-  }
+    readTime: 'NC',
+    content: `Bientôt disponible !`,
+  },
 ];

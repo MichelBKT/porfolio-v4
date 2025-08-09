@@ -107,16 +107,16 @@ const TerminalBlog = () => {
     switch (item.type) {
       case 'ascii-art':
         return (
-          <div className="text-neon-cyan font-mono text-lg leading-none mb-4">
+          <div className="text-neon-green font-mono lg:text-2xl text-xs leading-none mb-4">
             <pre>{`
- ██╗  ██╗███████╗██╗     ██╗      ██████╗     ██╗    ██╗ ██████╗ ██████╗ ██╗     ██████╗     ██╗
- ██║  ██║██╔════╝██║     ██║     ██╔═══██╗    ██║    ██║██╔═══██╗██╔══██╗██║     ██╔══██╗    ██║
- ███████║█████╗  ██║     ██║     ██║   ██║    ██║ █╗ ██║██║   ██║██████╔╝██║     ██║  ██║    ██║
- ██╔══██║██╔══╝  ██║     ██║     ██║   ██║    ██║███╗██║██║   ██║██╔══██╗██║     ██║  ██║    ╚═╝
- ██║  ██║███████╗███████╗███████╗╚██████╔╝    ╚███╔███╔╝╚██████╔╝██║  ██║███████╗██████╔╝    ██╗
- ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ ╚═════╝      ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝     ╚═╝
+██╗  ██╗ █████╗  ██████╗██╗  ██╗████████╗██╗   ██╗ 
+██║  ██║██╔══██╗██╔════╝██║ ██╔╝╚══██╔══╝██║   ██║ 
+███████║███████║██║     █████╔╝    ██║   ██║   ██║ 
+██╔══██║██╔══██║██║     ██╔═██╗    ██║   ██║   ██║ 
+██║  ██║██║  ██║╚██████╗██║  ██╗   ██║   ╚██████╔╝
+╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ 
             `}</pre>
-          </div>
+      </div>
         );
       
       case 'security-info':
@@ -159,13 +159,14 @@ const TerminalBlog = () => {
           <div className="space-y-2">
             {item.content.map((post, index) => (
               <div key={post.id} className="flex items-center space-x-4 font-mono text-sm">
-                <span className="text-neon-cyan">-rw-r--r--</span>
-                <span className="text-white w-8">{index + 1}</span>
-                <span className="text-neon-magenta">{post.date}</span>
+                <span className="text-neon-cyan max-md:hidden">-rw-r--r--</span>
+                <span className="text-white w-8 max-md:hidden">{index + 1}</span>
+                <span className="text-neon-magenta max-md:hidden">{post.date}</span>
                 <span className="text-yellow-400">{post.readTime}</span>
                 <button
-                  onClick={() => quickCommand(`cat ${post.id}`)}
-                  className="text-neon-green hover:text-white transition-colors cursor-pointer"
+                  onClick={() => post.title !== 'NC' ? quickCommand(`cat ${post.id}`) : null}
+                  className={`text-neon-green hover:text-white transition-colors cursor-pointer ${post.title === 'NC' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={post.title === 'NC'}
                 >
                   {post.id}.md
                 </button>
@@ -208,10 +209,7 @@ const TerminalBlog = () => {
                 ))}
               </div>
               
-              <div className="flex items-center justify-between mt-4">
-                <div className="text-neon-cyan font-mono text-sm">
-                  └─ Article prévisualisé ─┘
-                </div>
+              <div className="flex items-center justify-center mt-4">
                 <button
                   onClick={() => {
                     setSelectedArticle(post);
@@ -277,7 +275,6 @@ const TerminalBlog = () => {
                   onKeyDown={handleKeyPress}
                   className="bg-transparent border-none outline-none text-white font-mono text-sm flex-1"
                   placeholder="Tapez 'help' pour commencer..."
-                  autoFocus
                   disabled={isTyping}
                 />
                 <span className={`text-white font-mono text-sm ml-1 ${showCursor && !isTyping ? 'opacity-100' : 'opacity-0'}`}>
