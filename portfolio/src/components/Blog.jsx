@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { blogPosts } from '../data/blogPosts';
+import ArticleSlidePanel from './ArticleSlidePanel';
 
 const TerminalBlog = () => {
   const [currentCommand, setCurrentCommand] = useState('');
@@ -11,6 +12,8 @@ const TerminalBlog = () => {
   ]);
   const [showCursor, setShowCursor] = useState(true);
   const [isTyping, setIsTyping] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
   const terminalRef = useRef(null);
 
   useEffect(() => {
@@ -50,7 +53,13 @@ const TerminalBlog = () => {
       const postId = command.replace('cat ', '').replace('.md', '');
       const post = blogPosts.find(p => p.id === postId);
       if (post) {
-        newHistory.push({ type: 'article', content: post });
+        if (command.includes('--full')) {
+          setSelectedArticle(post);
+          setIsPanelOpen(true);
+          newHistory.push({ type: 'success', content: `Ouverture de l'article "${post.title}" dans le panneau latéral...` });
+        } else {
+          newHistory.push({ type: 'article', content: post });
+        }
       } else {
         newHistory.push({ type: 'error', content: `Article '${postId}' non trouvé` });
       }
@@ -199,8 +208,19 @@ const TerminalBlog = () => {
                 ))}
               </div>
               
-              <div className="text-neon-cyan font-mono text-sm mt-4">
-                └─ Type 'cat {post.id} --full' pour l'article complet ─┘
+              <div className="flex items-center justify-between mt-4">
+                <div className="text-neon-cyan font-mono text-sm">
+                  └─ Article prévisualisé ─┘
+                </div>
+                <button
+                  onClick={() => {
+                    setSelectedArticle(post);
+                    setIsPanelOpen(true);
+                  }}
+                  className="px-3 py-1 bg-neon-magenta/20 text-neon-magenta font-mono text-xs rounded hover:bg-neon-magenta/30 transition-colors border border-neon-magenta/30"
+                >
+                  Lire l'article complet →
+                </button>
               </div>
             </div>
           </div>
@@ -212,77 +232,90 @@ const TerminalBlog = () => {
     }
   };
 
-  return (
-    <div className="relative z-10 min-h-screen dark:bg-synth-dark bg-gray-600 opacity-80 text-white p-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-orbitron text-neon-cyan mb-2">
-            ~/blog
-          </h1>
-          <p className="text-gray-400 font-mono">Terminal de blog interactif / Collection d'articles à consulter</p>
-        </div>
+  const handleClosePage = () => {
+    setIsPanelOpen(false);
+    setSelectedArticle(null);
+  };
 
-        <div className="bg-black border border-gray-700 rounded-lg overflow-hidden shadow-2xl">
-          <div className="bg-gray-800 px-4 py-2 flex items-center space-x-2">
-            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-            <span className="text-gray-400 ml-4 font-mono text-sm">michel@portfolio:~/blog</span>
+  return (
+    <>
+      <div className="relative z-10 min-h-screen dark:bg-synth-dark bg-gray-600 opacity-80 text-white p-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-4xl font-orbitron text-neon-cyan mb-2">
+              ~/blog
+            </h1>
+            <p className="text-gray-400 font-mono">Terminal de blog interactif / Collection d'articles à consulter</p>
           </div>
-          
-          <div 
-            ref={terminalRef}
-            className="p-4 h-160 overflow-y-auto scrollbar-thin scrollbar-thumb-neon-cyan scrollbar-track-gray-800"
-          >
-            {terminalHistory.map((item, index) => (
-              <div key={index} className="mb-2">
-                {renderContent(item)}
-              </div>
-            ))}
+
+          <div className="bg-black border border-gray-700 rounded-lg overflow-hidden shadow-2xl">
+            <div className="bg-gray-800 px-4 py-2 flex items-center space-x-2">
+              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span className="text-gray-400 ml-4 font-mono text-sm">michel@portfolio:~/blog</span>
+            </div>
             
-            <div className="flex items-center">
-              <span className="text-neon-cyan font-mono text-sm mr-2">
-                michel@portfolio:~/blog$
-              </span>
-              <input
-                type="text"
-                value={currentCommand}
-                onChange={(e) => !isTyping && setCurrentCommand(e.target.value)}
-                onKeyDown={handleKeyPress}
-                className="bg-transparent border-none outline-none text-white font-mono text-sm flex-1"
-                placeholder="Tapez 'help' pour commencer..."
-                autoFocus
-                disabled={isTyping}
-              />
-              <span className={`text-white font-mono text-sm ml-1 ${showCursor && !isTyping ? 'opacity-100' : 'opacity-0'}`}>
-                █
-              </span>
+            <div 
+              ref={terminalRef}
+              className="p-4 h-160 overflow-y-auto scrollbar-thin scrollbar-thumb-neon-cyan scrollbar-track-gray-800"
+            >
+              {terminalHistory.map((item, index) => (
+                <div key={index} className="mb-2">
+                  {renderContent(item)}
+                </div>
+              ))}
+              
+              <div className="flex items-center">
+                <span className="text-neon-cyan font-mono text-sm mr-2">
+                  michel@portfolio:~/blog$
+                </span>
+                <input
+                  type="text"
+                  value={currentCommand}
+                  onChange={(e) => !isTyping && setCurrentCommand(e.target.value)}
+                  onKeyDown={handleKeyPress}
+                  className="bg-transparent border-none outline-none text-white font-mono text-sm flex-1"
+                  placeholder="Tapez 'help' pour commencer..."
+                  autoFocus
+                  disabled={isTyping}
+                />
+                <span className={`text-white font-mono text-sm ml-1 ${showCursor && !isTyping ? 'opacity-100' : 'opacity-0'}`}>
+                  █
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          <button
-            onClick={() => quickCommand('ls')}
-            className="px-3 py-1 bg-neon-cyan/20 text-neon-cyan font-mono text-sm rounded hover:bg-neon-cyan/30 transition-colors"
-          >
-            ls
-          </button>
-          <button
-            onClick={() => quickCommand('help')}
-            className="px-3 py-1 bg-yellow-400/20 text-yellow-400 font-mono text-sm rounded hover:bg-yellow-400/30 transition-colors"
-          >
-            help
-          </button>
-          <button
-            onClick={() => quickCommand('clear')}
-            className="px-3 py-1 bg-red-400/20 text-red-400 font-mono text-sm rounded hover:bg-red-400/30 transition-colors"
-          >
-            clear
-          </button>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <button
+              onClick={() => quickCommand('ls')}
+              className="px-3 py-1 bg-neon-cyan/20 text-neon-cyan font-mono text-sm rounded hover:bg-neon-cyan/30 transition-colors"
+            >
+              ls
+            </button>
+            <button
+              onClick={() => quickCommand('help')}
+              className="px-3 py-1 bg-yellow-400/20 text-yellow-400 font-mono text-sm rounded hover:bg-yellow-400/30 transition-colors"
+            >
+              help
+            </button>
+            <button
+              onClick={() => quickCommand('clear')}
+              className="px-3 py-1 bg-red-400/20 text-red-400 font-mono text-sm rounded hover:bg-red-400/30 transition-colors"
+            >
+              clear
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+
+      <ArticleSlidePanel 
+        isOpen={isPanelOpen}
+        article={selectedArticle}
+        onClose={handleClosePage}
+      />
+    </>
   );
 };
 
