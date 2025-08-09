@@ -62,7 +62,7 @@ const About = () => {
               Mais l'envie de coder, de créer et de donner vie à mes idées ne m'a jamais quitté.
             </Typography>
             <Typography className="text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 font-rajdhani">
-                En 2024, j'ai donc sauté le pas et obtenu mon titre de <strong>Développeur Web et Web Mobile.</strong>
+                En 2024, j'ai donc sauté le pas et obtenu mon titre de <strong>Développeur Web et Web Mobile. </strong>
               Aujourd'hui, je poursuis mon aventure à Epitech, déterminé à repousser mes limites et à
                explorer toujours plus loin le monde du développement web.<br/>
                <br/>

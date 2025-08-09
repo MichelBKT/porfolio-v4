@@ -5,6 +5,7 @@ const Home = lazy(() => import('./components/Home'));
 const About = lazy(() => import('./components/About'));
 const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
+const Blog = lazy(() => import('./components/Blog'));
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import EqualizerBackground from './components/EqualizerBackground';
@@ -53,6 +54,9 @@ function App() {
               </section>
               <section id="projects">
                 <Projects />
+              </section>
+              <section id="blog">
+                <Blog />
               </section>
               <section id="contact">
                 <Contact />
